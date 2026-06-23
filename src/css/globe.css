@@ -1,0 +1,67 @@
+/* src/css/globe.css — shared globe + whirl visuals (themeable via CSS vars) */
+
+/* 200 × 200 stage. */
+.loader {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  /* Whirl colors — override these in a parent scope to re-theme. */
+  --whirl-strong: rgba(44, 44, 44, 0.55);
+  --whirl-soft: rgba(44, 44, 44, 0.3);
+}
+
+.loader__globe {
+  position: absolute;
+  inset: 0;
+  width: 200px;
+  height: 200px;
+  display: block;
+}
+
+/* Whirl: two counter-rotating swept rings masked to thin bands near the edge. */
+.loader__whirl,
+.loader__whirl::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.loader__whirl {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--whirl-strong) 40deg,
+    transparent 110deg,
+    transparent 360deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 86px, #000 88px, #000 96px, transparent 98px);
+  mask: radial-gradient(circle, transparent 86px, #000 88px, #000 96px, transparent 98px);
+  animation: whirl-spin 2.4s linear infinite;
+}
+
+.loader__whirl::after {
+  background: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    var(--whirl-soft) 30deg,
+    transparent 90deg,
+    transparent 360deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 92px, #000 94px, #000 99px, transparent 100px);
+  mask: radial-gradient(circle, transparent 92px, #000 94px, #000 99px, transparent 100px);
+  animation: whirl-spin 3.6s linear infinite reverse;
+}
+
+@keyframes whirl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__whirl,
+  .loader__whirl::after {
+    animation: none;
+  }
+}
