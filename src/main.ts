@@ -211,10 +211,36 @@ function initContactForm(): void {
 
     if (!valid) return;
 
-    form.reset();
-    successDiv.hidden = false;
-    successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    window.setTimeout(() => { successDiv.hidden = true; }, 6000);
+    // Envia a mensagem para o seu e-mail via Formspree.
+    // 1. Crie uma conta gratis em https://formspree.io
+    // 2. Crie um novo form e copie o ID dele (ex: "xanypqrs").
+    // 3. Cole o ID abaixo, substituindo SEU_FORM_ID.
+    const FORMSPREE_ID = 'xnjkpkyo';
+    const endpoint = `https://formspree.io/f/${FORMSPREE_ID}`;
+
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+    const originalLabel = submitBtn?.textContent ?? '';
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; }
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`Falha no envio (HTTP ${res.status})`);
+        form.reset();
+        successDiv.hidden = false;
+        successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        window.setTimeout(() => { successDiv.hidden = true; }, 6000);
+      })
+      .catch((err) => {
+        console.error('Erro ao enviar o formulario de contato:', err);
+        setError('message', 'Nao foi possivel enviar agora. Tente novamente ou use o e-mail acima.');
+      })
+      .finally(() => {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+      });
   });
 }
 

@@ -5,13 +5,13 @@
 import type { Project } from './types';
 export const projects: Project[] = [
   {
-    title: 'Pokédex Grunt',
+    title: 'M.MusicPlayer',
     description:
-      'Pokédex interativa que consome a PokéAPI, permitindo buscar e visualizar informações detalhadas dos Pokémon.',
-    tags: ['JavaScript', 'API'],
-    image: 'assets/poke-vs.png',
-    demoUrl: 'https://g-test-lemon.vercel.app',
-    repoUrl: 'https://github.com/Sanabre3crie/pokedex_grunt',
+      'Player de música audio-reativo com vinil giratório, analisador de espectro (Web Audio API), equalizador de 10 bandas e uma aba "Zone" para músicos com diagramas de acordes, tablatura e detecção de tom em tempo real.',
+    tags: ['TypeScript', 'Vite', 'Web Audio API'],
+    image: 'https://placehold.co/400x220/2563EB/ffffff?text=M.MusicPlayer',
+    demoUrl: 'https://zone-player.vercel.app',
+    repoUrl: 'https://github.com/Sanabre3/M.MusicPlayer',
   },
   {
     title: 'Decoration Dash',
