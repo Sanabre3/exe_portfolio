@@ -9,7 +9,7 @@ export const projects: Project[] = [
     description:
       'Player de música audio-reativo com vinil giratório, analisador de espectro (Web Audio API), equalizador de 10 bandas e uma aba "Zone" para músicos com diagramas de acordes, tablatura e detecção de tom em tempo real.',
     tags: ['TypeScript', 'Vite', 'Web Audio API'],
-    image: 'https://placehold.co/400x220/2563EB/ffffff?text=M.MusicPlayer',
+    image: 'assets/zone-player.png',
     demoUrl: 'https://zone-player.vercel.app',
     repoUrl: 'https://github.com/Sanabre3/M.MusicPlayer',
   },
